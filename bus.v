@@ -10,21 +10,21 @@ module bus(clk, reset_n, m0_req, m0_wr, m0_address, m0_dout, m1_req, m1_wr, m1_a
 	output [31:0] m_din, s_din;
 	
 	wire m_sel;
-	reg [2:0]sel4Mux3;
+	reg [2:0]sel4Mux3; //set input and output and reg and wire
 	
 	bus_arbit Arbiter(.clk(clk), .reset_n(reset_n), .m0_req(m0_req), .m1_req(m1_req), .m0_grant(m0_grant), .m1_grant(m1_grant), .m_sel(m_sel));
 	mux2 for_wr(.d0(m0_wr), .d1(m1_wr), .s(m_sel), .y(s_wr));
 	mux2_8bits for_addr(.d0(m0_address), .d1(m1_address), .s(m_sel), .y(s_address));
 	mux2_32bits for_s_din(.d0(m0_dout), .d1(m1_dout), .s(m_sel), .y(s_din));
-	bus_addr Address_decoder(.s_address(s_address), .s0_sel(s0_sel), .s1_sel(s1_sel));
+	bus_addr Address_decoder(.s_address(s_address), .s0_sel(s0_sel), .s1_sel(s1_sel)); //run module for selection
 	
 	always @(posedge clk or negedge reset_n)
 	begin
 		if(~reset_n) sel4Mux3 <=2'b00;
 		else sel4Mux3 <= {s1_sel,s0_sel};
-	end
+	end //set selection signal for MUX3
 	
-	mux3_32bit for_m_din(.d0(32'h0), .d1(s0_dout), .d2(s1_dout), .s(sel4Mux3), .y(m_din));
+	mux3_32bit for_m_din(.d0(32'h0), .d1(s0_dout), .d2(s1_dout), .s(sel4Mux3), .y(m_din)); //run module for selection
 	
 
 endmodule

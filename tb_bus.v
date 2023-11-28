@@ -7,12 +7,12 @@ module tb_bus;
 	
 	wire m0_grant, m1_grant, s0_sel, s1_sel, s_wr;
 	wire [7:0] s_address;
-	wire [31:0] m_din, s_din;
+	wire [31:0] m_din, s_din; //set reg and wire
 	
 	bus test_bus(.clk(clk), .reset_n(reset_n), .m0_req(m0_req), .m0_wr(m0_wr), .m0_address(m0_address), .m0_dout(m0_dout)
 	, .m1_req(m1_req), .m1_wr(m1_wr), .m1_address(m1_address), .m1_dout(m1_dout), .s0_dout(s0_dout), .s1_dout(s1_dout)
 	, .m0_grant(m0_grant), .m1_grant(m1_grant), .m_din(m_din), .s0_sel(s0_sel), .s1_sel(s1_sel), .s_address(s_address)
-	, .s_wr(s_wr), .s_din(s_din));
+	, .s_wr(s_wr), .s_din(s_din)); //run module
 	
 	always
 	begin
@@ -20,7 +20,7 @@ module tb_bus;
 	end
 	//wr = 0 -> write, wr = 1 -> read
 	initial
-	begin
+	begin //test begin
 		#0; clk = 0; reset_n = 0; m0_req = 1; m1_req = 0; m0_wr = 0; m1_wr = 0; m0_address= 8'h00; m1_address=8'h00; 
 		s0_dout = 32'h11111111; s1_dout = 32'h22222222; m0_dout = 32'h33333333; m1_dout = 32'h44444444;
 		#2; reset_n = 1;
@@ -44,5 +44,5 @@ module tb_bus;
 		#10; m0_req = 1;
 		#30; m1_req = 0;
 		#10; $finish;
-	end
+	end //test end
 endmodule

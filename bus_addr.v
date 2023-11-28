@@ -16,6 +16,6 @@ module bus_addr(s_address, s0_sel, s1_sel);
 			s0_sel<=1'b0;
 			s1_sel<=1'b0;
 		end
-	end
+	end //set slave selection
 	
 endmodule

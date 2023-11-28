@@ -3,7 +3,7 @@ module bus_arbit(clk, reset_n, m0_req, m1_req, m0_grant, m1_grant, m_sel);
 	input clk, reset_n, m0_req,  m1_req;
 	output reg m0_grant, m1_grant, m_sel;
 	
-	reg state, next_state;
+	reg state, next_state; //set input and output and reg
 	
 	parameter M0=1'b0;
 	parameter M1=1'b1;
